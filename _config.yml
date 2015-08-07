@@ -1,0 +1,31 @@
+# Site settings
+title: "Varun Balupuri"
+email: varunbalupuri@gmail.com
+description: "London based postgraduate mathematics student and techno enthusiast. "
+baseurl: ""
+url: "http://varunbalupuri.com"
+title_description: "London based postgraduate mathematics student and techno enthusiast."
+title_image: "http://i.imgur.com/3pw5Zdw.jpg"
+google_analytics: "UA-20365477-4"
+disqus_account:
+github_repository: https://github.com/varunbalupuri/varunbalupuricom
+addthis_id: ra-513c6fa83da6ec67
+post_limit: 10
+
+# Social usernames/URLs
+twitter_username: 
+github_username:  varunbalupuri
+linkedin_link: https://uk.linkedin.com/pub/varun-balupuri/101/773/3b5
+google_plus_link: 
+stackoverflow_link: 
+
+# Footer
+footer_left: "Varun Balupuri"
+footer_right: 
+
+# Build settings
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+permalink: pretty
+exclude: [vendor]
