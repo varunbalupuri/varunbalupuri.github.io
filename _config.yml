@@ -21,7 +21,7 @@ stackoverflow_link:
 
 # Footer
 footer_left: "© 2015 Varun Balupuri"
-footer_right: "Jekyll Theme created by jacobtomlinson"
+footer_right: "Created with Jekyll"
 
 # Build settings
 markdown: redcarpet
