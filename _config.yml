@@ -20,8 +20,8 @@ google_plus_link:
 stackoverflow_link: 
 
 # Footer
-footer_left: "Varun Balupuri"
-footer_right: 
+footer_left: "© 2015 Varun Balupuri"
+footer_right: "Jekyll Theme created by jacobtomlinson"
 
 # Build settings
 markdown: redcarpet
