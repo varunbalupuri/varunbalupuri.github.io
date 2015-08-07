@@ -3,7 +3,7 @@ layout:     post
 title:      Facebook Message Analysis.
 date:       2015-08-7 21:01:19
 summary:    Facebook message analysis.
-categories: jekyll
+categories: data analysis
 thumbnail: cogs
 tags:
 
@@ -11,12 +11,10 @@ tags:
 
 Facebook allows users to download their full data. Within this data is a full html page of every message sent by you and to you. Out of interest, I wanted to chart when certain people message me and how many messages I've recieved from them
 
- Using python and matplotlib, this is fairly simple to do.
+Using python and matplotlib, this is fairly simple to do.
 
 
-First, we strip all html tags. My messages file totals over 100,000 messages, our first task is to strip html tags.
-
-### Code, with syntax highlighting
+First, we strip all html tags. My messages file totals over 100,000 messages and is quite a large file (for text), our first task is to strip html tags.
 
 {% highlight python %}
 from HTMLParser import HTMLParser
@@ -136,7 +134,10 @@ plt.show()
 
 > [You can view a high res image of my results with a few selected friends here][1]
 
+
 Note: Red deleted her account for a while around May 2014 explaining the gap.
+
+Stay tuned for more message analysis coming soon, just whacked this out today, got a lot more work to do on it!
 
 
 [1]: http://i.imgur.com/yam6c47.png
