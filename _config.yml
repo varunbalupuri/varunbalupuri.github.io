@@ -1,10 +1,10 @@
 # Site settings
 title: "Varun Balupuri"
 email: varunbalupuri@gmail.com
-description: "London based postgraduate mathematics student and techno enthusiast. "
+description: "Data Analysis blog of a London based postgraduate mathematics student "
 baseurl: ""
 url: "http://varunbalupuri.com"
-title_description: "London based postgraduate mathematics student and techno enthusiast."
+title_description: "Data Analysis blog of a London based postgraduate mathematics student"
 title_image: "http://i.imgur.com/3pw5Zdw.jpg"
 google_analytics: "UA-20365477-42"
 disqus_account:
@@ -21,7 +21,7 @@ stackoverflow_link:
 
 # Footer
 footer_left: "© 2015 Varun Balupuri"
-footer_right: "Created with Jekyll"
+footer_right: ""
 
 # Build settings
 markdown: redcarpet
