@@ -130,8 +130,7 @@ plt.show()
 
 {% endhighlight %}
 
-<img src="http://i.imgur.com/yam6c47.png" width="200" height="200" />
-
+![Messages](http://i.imgur.com/yam6c47.png)
 
 > [You can view a high res image of my results with a few selected friends here][1]
 
