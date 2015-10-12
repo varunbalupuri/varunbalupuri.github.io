@@ -1,55 +1,37 @@
 ---
 layout: default
+date: 2014-10-19 23:51
 ---
-
-
-<div class="container-fluid index">
-    <div class="row">
-
-        <div class="col-md-12 main content-panel">
-
-            <div class="gravatar">
-                <img src="{{ site.title_image }}" class="img-circle about-image" height="150" width="150" alt="{{ site.title }}" />
-            </div>
-
-            <h1 class="header author-header" itemprop="headline">{{ site.title }}</h1>
-
-            <div class="author-text">
-                {{ site.title_description }}
-            </div>
-
-            <div class="links">
-                {% if site.twitter_username %}<a href="http://www.twitter.com/{{ site.twitter_username }}" target="_new"><i class="fa fa-twitter fa-2x"></i></a>{% endif %}
-                {% if site.linkedin_link %}<a href="{{ site.linkedin_link }}" target="_new"><i class="fa fa-linkedin fa-2x"></i></a>{% endif %}
-                {% if site.google_plus_link %}<a href="{{ site.google_plus_link }}" target="_new"><i class="fa fa-google-plus fa-2x"></i></a>{% endif %}
-                {% if site.github_username %}<a href="https://github.com/{{ site.github_username }}" target="_new"><i class="fa fa-github-alt fa-2x"></i></a>{% endif %}
-                {% if site.stackoverflow_link %}<a href="{{ site.stackoverflow_link }}" target="_new"><i class="fa fa-stack-overflow fa-2x"></i></a>{% endif %}
-                <a href="feed.xml" target="_new"><i class="fa fa-rss fa-2x"></i></a>
-            </div>
-          </div>
-          <div class="col-md-12 main content-panel">
-
-            <div class="articles">
-
-              <h2>Latest Articles</h2>
-
-              <ul>
-                  {% for post in site.posts | limit: site.post_limit %}
-
-                      <li>
-                          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                          <small class="hidden-xs">{{ post.date | date: "%B %-d, %Y" }}</small>
-                      </li>
-
-                  {% endfor %}
-                  <li>
-                      <small><i><a href="/posts/">more...</a></i></small>
-                  </li>
-              </ul>
-
-            </div>
-
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+    {% for post in site.posts %}
+      <div class="blog-short">
+        <h3><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h3>
+		<div>
+		  <small>
+			<i class="fa fa-calendar"></i>
+			<time>
+        {{ post.date | date:'%A, %B %d, %Y'}}
+			</time>
+		  </small>
+         </div>
+		    <div class="margin10">
+          <small>
+            <i class="fa fa-tag"></i>
+            {% for tag in post.tags %}
+              <span class="label label-primary">{{tag}}</span>
+            {% endfor %}
+          </small>
         </div>
-
-    </div>
+        {% if post.thumbnail %}
+          <div class="imgcontainer col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <img src="{{post.thumbnail}}"
+            alt="{{post.title}}"  class="pull-left img-responsive thumb img-thumbnail" />
+          </div>
+        {% endif %}
+        <article class="excerpt">{{post.excerpt}}</article>
+        <a class="pull-right marginBottom10" href="{{post.url | prepend: site.baseurl }}">Read More</a>
+      </div>
+    {% endfor %}
+  </div>
 </div>
