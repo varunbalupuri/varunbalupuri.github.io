@@ -10,4 +10,4 @@ tags:
 ---
 
 
-<iframe width=750 height=500 frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~varunbalupuri/24/percentage-of-total-facebook-messages-recieved-per-hour/"> </iframe> 
+<iframe width=1000 height=500 frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~varunbalupuri/24/percentage-of-total-facebook-messages-recieved-per-hour/"> </iframe> 
