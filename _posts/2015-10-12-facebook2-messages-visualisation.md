@@ -133,7 +133,7 @@ def heatmap_gen(names):
 
   url = py.plot(fig, filename='facebook-hourly', validate=False)   
 
-{% highlight python %}
+{% endhighlight %}
 
 
 <iframe width=950 height=500 frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~varunbalupuri/24/percentage-of-total-facebook-messages-recieved-per-hour/"> </iframe> 
