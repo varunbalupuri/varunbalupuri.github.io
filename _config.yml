@@ -24,7 +24,7 @@ footer_left: "© 2015 Varun Balupuri"
 footer_right: ""
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
 permalink: pretty
