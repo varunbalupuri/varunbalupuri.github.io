@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Facebook Message Analysis. | Varun Balupuri</title>
+	<meta name="description" content="Facebook allows users to download their full data. Within this data is a full html page of every message sent by you and to you. Out of interest, I wanted to...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://varunbalupuri.com/data/analysis/2015/08/07/facebook-messages-visualisation.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Varun Balupuri" href="http://varunbalupuri.com/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/img/avatar.png" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Varun Balupuri</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:varunbalupuri@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/varunbalupuri" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://uk.linkedin.com/in/varun-balupuri-3b5773101" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Facebook Message Analysis.</h1>
+    <p class="meta">
+    August 7, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>Facebook allows users to download their full data. Within this data is a full html page of every message sent by you and to you. Out of interest, I wanted to chart when certain people message me and how many messages I’ve recieved from them</p>
+
+<p>Using python and matplotlib, this is fairly simple to do.</p>
+
+<p>First, we strip all html tags. My messages file totals over 100,000 messages and is quite a large file (for text), our first task is to strip html tags.</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">HTMLParser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">argv</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="k">class</span> <span class="nc">MLStripper</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">strip_tags</span><span class="p">(</span><span class="n">html</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">MLStripper</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+
+<span class="n">txt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;messages.htm&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="c">#reading the messages file</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">txt</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">fullstring</span> <span class="o">=</span> <span class="n">strip_tags</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></code></pre></div>
+
+<p>Next, we create a function which, when fed with a friends name outputs a date sorted list of every message.
+Using a simple regex, we can filter out references to names within messages and only look at those with a timestamp immediately after them as these are the messages sent by them to me.</p>
+
+<p>Facebook message times are of the form:</p>
+
+<pre><code>'18 January 2014 at 20:47 UTC'
+</code></pre>
+
+<p>We convert this to a datetime object for our visualisation.</p>
+
+<p>Then, we write the datetime of every message sent, along with a counter to a CSV file</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">dates_times_of_msgs</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+  <span class="n">search</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c"># Search for all mentions of name</span>
+  <span class="n">name_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
+
+  <span class="n">indexes_of_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">search</span><span class="p">,</span> <span class="n">fullstring</span><span class="p">)]</span> <span class="c"># indexed of name</span>
+  
+  <span class="n">find</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;^(.*?\UTC)&#39;</span><span class="p">)</span> <span class="c"># </span>
+  <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+  
+  <span class="n">listo</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">indexes_of_name</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span>  <span class="n">fullstring</span><span class="p">[</span><span class="n">indexes_of_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">name_len</span> <span class="p">:</span> <span class="n">indexes_of_name</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+  
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">x</span><span class="o">=</span>  <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">find</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">datetime_of_msg</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;%A, </span><span class="si">%d</span><span class="s"> %B %Y at %H:%M %Z&#39;</span><span class="p">))</span> <span class="c"># Converts to datetime object</span>
+        <span class="n">listo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime_of_msg</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">name</span><span class="p">,</span><span class="n">datetime_of_msg</span><span class="p">,</span><span class="n">counter</span><span class="p">])</span>
+      <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+      
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">continue</span>
+  <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">listo</span><span class="p">)</span></code></pre></div>
+
+<p>Now, define a simple plotter function to draw our names on a line graph:</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">plotter</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="n">dates_times_of_msgs</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+  <span class="n">days</span><span class="o">=</span><span class="p">[]</span>
+  <span class="n">c</span><span class="o">=</span><span class="p">[]</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="n">days</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">col</span><span class="p">)</span></code></pre></div>
+
+<p>Now we can call the plotter function with name and desired colours as many times as we like!</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plotter</span><span class="p">(</span><span class="s">&#39;person1&#39;</span><span class="p">,</span><span class="s">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="p">(</span><span class="s">&#39;person2&#39;</span><span class="p">,</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="p">(</span><span class="s">&#39;person3&#39;</span><span class="p">,</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="p">(</span><span class="s">&#39;person3&#39;</span><span class="p">,</span><span class="s">&#39;green&#39;</span><span class="p">)</span></code></pre></div>
+
+<p>Note: I have modified names here for anonymity reasons.</p>
+
+<p>Adding some styling options for the graph and displaying it below:</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Cumulative Number of Facebook Messages Recieved From Person Since Collection Began&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Date&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Number of Messages Recieved&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></div>
+
+<p><img src="http://i.imgur.com/yam6c47.png" alt="Messages" /></p>
+
+<blockquote>
+  <p><a href="http://i.imgur.com/yam6c47.png">You can view a high res image of my results with a few selected friends here</a></p>
+</blockquote>
+
+<p>Note: Red deleted her account for a while around May 2014 explaining the gap.</p>
+
+<p>Stay tuned for more message analysis coming soon, just whacked this out today, got a lot more work to do on it!</p>
+
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    
+<script src="/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text"></p>
+</footer>
+
+
+  </body>
+</html>

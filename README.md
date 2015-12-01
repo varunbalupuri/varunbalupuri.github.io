@@ -1,37 +1,14 @@
-# Simply Grey
-Simply Grey is a nice, easy on the eyes Jekyll theme that makes great use of grey colours. 
+# Type Theme
 
-![Screenshot of Simply Grey](http://i.imgur.com/sKpj8Oz.png)
+![Default Type Theme blog](https://cloud.githubusercontent.com/assets/816965/5142407/19742e48-71d6-11e4-8d9d-fdfe010784f0.png)
 
-## Installation
-There are a few requirements to using and installing the Simply Grey theme.
+A free and open-source [Jekyll](http://jekyllrb.com) theme. Great for blogs and easy to customize.
 
-1. You must have Jekyll installed. If you have no done this, do it by executing the following code. 
-`gem install jekyll`
+## Get Started
 
-2. You must have git installed. If you do not have this, install it on your system by using your package manager. For example, in Debian, type 
-`sudo apt-get install git`
+[Demo](https://rohanchandra.github.io/type-theme/)
 
-Once you have done this, installation is pretty easy.
+[Using Type](https://rohanchandra.github.io/project/type/)
 
-Simply clone the repository
-
-`git clone https://github.com/mondss/simplygrey-jekyll.git`
-
-and serve the blog up so people can see it
-
-`cd simplygrey-jekyll; jekyll serve`
-
-## Configuring SimplyGrey
-The SimplyGrey theme is actually very easy to configure.
-
-### Adding more links to the navigation bar
-1. Open the _config.yml file
-2. Add some more values to the urls hash like the others that already exist there.
-
-### Changing the site name
-1. Open the _config.yml file
-2. Change the site name
-
-### Changing the logo/picture image
-1. Drop a 75x75 image into the img directory.
+## License
+The MIT License (MIT)

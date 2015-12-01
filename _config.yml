@@ -1,31 +1,70 @@
-# Site settings
-title: "Varun Balupuri"
-email: varunbalupuri@gmail.com
-description: "Data Analysis blog of a London based postgraduate mathematics student "
-baseurl: ""
-url: "http://varunbalupuri.com"
-title_description: "Data Analysis blog of a London based postgraduate mathematics student"
-title_image: "http://i.imgur.com/3pw5Zdw.jpg"
-google_analytics: "UA-20365477-42"
-disqus_account:
-github_repository: https://github.com/varunbalupuri/varunbalupuricom
-addthis_id: ra-513c6fa83da6ec672
-post_limit: 10
+# SITE CONFIGURATION
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://varunbalupuri.com" # the base hostname & protocol for your site
 
-# Social usernames/URLs
-twitter_username: varunbalupuri0101
-github_username:  varunbalupuri
-linkedin_link: https://uk.linkedin.com/pub/varun-balupuri/101/773/3b5
-google_plus_link: 
-stackoverflow_link: 
+# THEME-SPECIFIC CONFIGURATION
+theme:
+  # Meta
+  title: Varun Balupuri
+  avatar: avatar.png
+  gravatar: # Email MD5 hash
+  description: "Varun Balupuri - Blog" # used by search engines
 
-# Footer
-footer_left: "© 2015 Varun Balupuri"
-footer_right: ""
+  # Header and footer text
+  header_text: >
+     <h3>Data/Mathematics Blog of a London based postgraduate mathematics student.</h3>
 
-# Build settings
-markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
-permalink: pretty
-exclude: [vendor]
+  header_text_feature_image: header.jpg
+  footer_text: >
+   
+  # Icons
+  rss: false
+  email_address: varunbalupuri@gmail.com
+  behance:
+  bitbucket:
+  dribbble:
+  facebook:
+  flickr:
+  github: "varunbalupuri"
+  google_plus:
+  instagram:
+  linkedin: "https://uk.linkedin.com/in/varun-balupuri-3b5773101"
+  pinterest:
+  reddit:
+  soundcloud:
+  stack_exchange:  # Full URL
+  steam:
+  tumblr:
+  twitter: 
+  wordpress:
+  youtube:
+
+  # Scripts
+  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  disqus_shortname:
+  katex: true # Enable if using math markup
+
+  # Localization strings
+  str_follow_on: "Follow on"
+  str_rss_follow: "Follow RSS feed"
+  str_email: "Email"
+  str_next: "Next"
+  str_prev: "Prev"
+  str_continue_reading: "Continue reading"
+
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
+  # Post navigation
+  post_navigation: false
+
+# PAGINATION
+paginate: 5
+paginate_path: "blog/page:num"
+
+# BUILD SETTINGS
+markdown: kramdown
+highlighter: pygments
+sass:
+  sass_dir: _sass
+  style: :compressed

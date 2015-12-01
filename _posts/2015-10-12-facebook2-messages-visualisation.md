@@ -13,7 +13,7 @@ Expanding on my earlier facebook visualisation post, here is a python script, wh
 
 The only dependencies are numpy and plotly.
 
-The code below is easy enough to modify, changing the 'names' list to include as many friends as one wishes, I have included 4 friends for demonstration purposes, with over 40,000 messages over 4 years.
+The code below is easy enough to modify, changing the 'names' list to include as many friends as one wishes, I have included 4 friends for demonstration purposes, with over 80,000 messages over 4 years.
 
 
 {% highlight python %}
@@ -95,8 +95,6 @@ def hours_of_messages(name):
 
   return k
 
-#names = ['Adam Butterfield','Joseph Noaman','Ben Jeffrey','Madhu Vanthi']
-
 def heatmap_gen(names):
   # input names as list eg: names = ['John Doe','Bob Jones',...]
 
@@ -136,7 +134,10 @@ def heatmap_gen(names):
 {% endhighlight %}
 
 
-<iframe width=950 height=500 frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~varunbalupuri/24/percentage-of-total-facebook-messages-recieved-per-hour/"> </iframe> 
+fpoadjwiopfhweaio
+
+
+<iframe width="950" height="500" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~varunbalupuri/24/percentage-of-total-facebook-messages-recieved-per-hour/"> </iframe> 
 
 
 
