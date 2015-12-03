@@ -5,7 +5,7 @@
     <atom:link href="http://varunbalupuri.com/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://varunbalupuri.com/</link>
     <description>Varun Balupuri - Blog</description>
-    <pubDate>Thu, 03 Dec 2015 20:19:16 +0000</pubDate>
+    <pubDate>Thu, 03 Dec 2015 20:24:22 +0000</pubDate>
     
       <item>
         <title>Finding and Testing Parameters of the Vasicek Model.</title>
@@ -118,11 +118,11 @@ Red: &lt;script type=&quot;math/tex&quot;&gt;\mu = 1, \lambda = 1.5, \sigma = 0.
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\Rightarrow \mu_{est} = \frac{\sum^{n}_{t=1}(S_t-S_{t-1})e^{-\lambda}}{n(1-e^{-\lambda})}&lt;/script&gt;
 
-&lt;p&gt;The case is similar for &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\sigma_1&lt;/script&gt; as shown in this &lt;a href=&quot;http://www.sitmo.com/article/calibrating-the-ornstein-uhlenbeck-model/&quot;&gt;sitmo post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The case is similar for &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\sigma_1&lt;/script&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;plotting&quot;&gt;Plotting&lt;/h2&gt;
 
-&lt;p&gt;Data was taken from Bloomberg Terminal’s at King’s College London&lt;/p&gt;
+&lt;p&gt;Data was taken from Bloomberg Terminals at King’s College London&lt;/p&gt;
 
 &lt;p&gt;Plotting the Backtest Data (30 minute granularity, no weekend data)&lt;/p&gt;
 
