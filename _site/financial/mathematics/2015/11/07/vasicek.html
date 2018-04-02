@@ -8,16 +8,16 @@
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/varunbalupuri.github.io/css/main.css">
 
 	<!--Favicon-->
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/varunbalupuri.github.io/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="http://varunbalupuri.com/financial/mathematics/2015/11/07/vasicek.html">
+	<link rel="canonical" href="http://localhost:4000/varunbalupuri.github.io/financial/mathematics/2015/11/07/vasicek.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="Varun Balupuri" href="http://varunbalupuri.com/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Varun Balupuri" href="http://localhost:4000/varunbalupuri.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -41,12 +41,12 @@
     <header class="site-header">
 	<div class="branding">
 		
-		<a href="/">
-			<img class="avatar" src="/img/avatar.png" alt=""/>
+		<a href="/varunbalupuri.github.io/">
+			<img class="avatar" src="/varunbalupuri.github.io/img/avatar.png" alt=""/>
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">Varun Balupuri</a>
+			<a href="/varunbalupuri.github.io/">Varun Balupuri</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -56,7 +56,7 @@
 			
 			
 			<li>
-				<a class="page-link" href="/about/">
+				<a class="page-link" href="/varunbalupuri.github.io/about/">
 					About
 				</a>
 			</li>
@@ -133,7 +133,7 @@
 
     <div class="content">
       <article class="feature-image">
-  <header style="background-image: url('/img/header_vasicek.jpg')">
+  <header style="background-image: url('/varunbalupuri.github.io/img/header_vasicek.jpg')">
     <h1 class="title">Finding and Testing Parameters of the Vasicek Model.</h1>
     <p class="meta">
     November 7, 2015
@@ -195,7 +195,8 @@
 
 <p><strong>This can be simulated in code and we can generate sample paths as shown:</strong></p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">vasicek_path</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">_lambda</span><span class="p">,</span> <span class="n">starting</span><span class="p">,</span> <span class="n">n_ticks</span><span class="p">):</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">	  
+<span class="k">def</span> <span class="nf">vasicek_path</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">_lambda</span><span class="p">,</span> <span class="n">starting</span><span class="p">,</span> <span class="n">n_ticks</span><span class="p">):</span>
     <span class="c"># runs a simulated trajectory path with n ticks</span>
     <span class="c"># with given parameters and starting value</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">starting</span><span class="p">]</span>
@@ -220,7 +221,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'i'</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">plotter</span><span class="p">()</span></code></pre></div>
+<span class="n">plotter</span><span class="p">()</span></code></pre></figure>
 
 <p><img src="/img/simulations.png" alt="simulations" />
 Red: <script type="math/tex">\mu = 1, \lambda = 1.5, \sigma = 0.25</script></p>
@@ -255,7 +256,7 @@ Red: <script type="math/tex">\mu = 1, \lambda = 1.5, \sigma = 0.25</script></p>
 
 <p>Plotting the Backtest Data (30 minute granularity, no weekend data)</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'usdeur30min.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
@@ -266,13 +267,13 @@ Red: <script type="math/tex">\mu = 1, \lambda = 1.5, \sigma = 0.25</script></p>
         <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
 
 <span class="n">dates</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>	  <span class="c"># Chronologically</span>
-<span class="n">prices</span> <span class="o">=</span> <span class="n">prices</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c">#</span></code></pre></div>
+<span class="n">prices</span> <span class="o">=</span> <span class="n">prices</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># </span></code></pre></figure>
 
 <h2 id="simulating-trajectories-with-estimated-parameters">Simulating Trajectories with Estimated Parameters</h2>
 
 <p>With the initial starting mid-price, 50 simulations are ran with the MLE parameters, along with the real data in red.</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s_x</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s_x</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">s_y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prices</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 <span class="n">s_xx</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">s_yy</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
@@ -303,7 +304,7 @@ Red: <script type="math/tex">\mu = 1, \lambda = 1.5, \sigma = 0.25</script></p>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Mid Price of USD/EUR: 08/11/15 - 01/12/15'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'USDEUR Mid Price'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Date'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></div>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
 
 <p><img src="/img/simulations_and_real2.png" alt="testing" /></p>
 
@@ -324,7 +325,7 @@ Red: <script type="math/tex">\mu = 1, \lambda = 1.5, \sigma = 0.25</script></p>
 
     </div>
     
-<script src="/js/katex_init.js"></script>
+<script src="/varunbalupuri.github.io/js/katex_init.js"></script>
 
 
 
