@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "varunbalupuri.github.io"
 url: "http://varunbalupuri.com" # the base hostname & protocol for your site
 
 # THEME-SPECIFIC CONFIGURATION
