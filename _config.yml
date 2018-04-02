@@ -6,7 +6,7 @@ url: "http://varunbalupuri.com" # the base hostname & protocol for your site
 theme:
   # Meta
   title: Varun Balupuri
-  avatar: avatar.png
+  avatar: img/avatar.png
   gravatar: # Email MD5 hash
   description: "Varun Balupuri - Blog" # used by search engines
 
@@ -14,7 +14,7 @@ theme:
   header_text: >
      <h3></h3>
 
-  header_text_feature_image: header.jpg
+  header_text_feature_image: img/header.jpg
   footer_text: >
    
   # Icons

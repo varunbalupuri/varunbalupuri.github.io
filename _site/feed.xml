@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Varun Balupuri</title>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <link>http://localhost:4000/</link>
+    <atom:link href="http://varunbalupuri.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://varunbalupuri.com/</link>
     <description>Varun Balupuri - Blog</description>
-    <pubDate>Tue, 03 Apr 2018 00:05:37 +0100</pubDate>
+    <pubDate>Tue, 03 Apr 2018 00:14:45 +0100</pubDate>
     
       <item>
         <title>Finding and Testing Parameters of the Vasicek Model.</title>
-        <link>http://localhost:4000/financial/mathematics/2015/11/07/vasicek.html</link>
-        <guid isPermaLink="true">http://localhost:4000/financial/mathematics/2015/11/07/vasicek.html</guid>
+        <link>http://varunbalupuri.com/financial/mathematics/2015/11/07/vasicek.html</link>
+        <guid isPermaLink="true">http://varunbalupuri.com/financial/mathematics/2015/11/07/vasicek.html</guid>
         <description>&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
 

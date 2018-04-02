@@ -2,7 +2,7 @@
 layout: page
 title: About
 permalink: /about/
-feature-img: "img/header.jpg"
+feature-img: "{{ site.url }}/img/header.jpg"
 ---
 
 
