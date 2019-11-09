@@ -27,6 +27,7 @@ performed in `marketdata.parse_betfair_historical.py`
 ELO model is build from match data in `cricstat.train_elo_model` and ML model trained in `cricstat.train_model`. A
 simple command line interface for live trading is at `cricstat.livetrading.cli_trade_interface`
 . This repository does not contain any fully automated trading code.
+
 ### Explanation:
 
 ##### Before We Start Though -- How Good is the Market at Predicting a Match Result?
@@ -37,12 +38,16 @@ If we can built a predictive model which has a lower log loss than this, then in
 we are in general better than the market and can make profits in the long run by backing undervalued teams and laying overvalued teams. In reality
 there are additional factors which need to be taken into account such as transaction costs (the exchanges commision) 
 and the liquidity of the market.
- 
+
 For the purposes of this simulation we use the final pre-match pricing available (usually a second or so before the match begins)
 First, lets see what would happen if we just bet according to market odds[2] to get an indication of how tight this
 market is using a fixed bet size each time:
 
 ![simulations_naive](/images/cricketstats/simulated_market_betting_50_paths.png)
+
+Alternatively, consider a purely random bettor, who chooses which team to bet on based on a 50/50 coinflip.
+
+![pure_random_bettor](/images/cricketstats/pure_random_bettor.png)
 
 Pretty good, even with Betfair's 5% commision on winning bets, this market is quite efficient, with the mean P&L of these
 simulations being very close to zero. As expected, playing this market in this way is not exactly a good idea for profitibility, however it is a much
@@ -51,6 +56,16 @@ The distribution of terminal income is roughly Gaussian as one would since these
 trials.
 
 ![terminal_wealth_naive](/images/cricketstats/terminal_dist_naive_5000.png)
+
+
+
+I ran various other naive simulations, such as always betting on the underdog/favourite 
+
+Note: Always betting on the home team appears to do very well around Summer 2019, this is due to the Mens ODI world cup where England won at home. Due to the relatively small sample size, the deceptively good P&L of this strategy should be viewed with caution.
+
+![naive_bets_](/images/cricketstats/naive_bets.png)
+
+
 
 ### I: ELO model:
 
@@ -63,7 +78,6 @@ accordingly.
 For an interesting read about the mathematics behind the rating system see [this blog post](https://blog.mackie.io/the-elo-algorithm).
 
 ELO has a few hyperparameters and a simple grid-search yields optimal parameters, yielding `k=26`. [3]
-
 
 ### II: Gradient Boosting Features:
 
@@ -107,6 +121,8 @@ Training the model using catboost's gradient boosting implementation yields opti
 
 ### Backtesting and Trading
 
+**Strategy 1:**
+
 As a first test, lets introduce a very simple strategy. define a confidence score for each match as:
 
 ```
@@ -126,12 +142,41 @@ one should use the Kelly Criterion to determine betsize rather than a fixed amou
 As the confidence threshold increases, naturally, the volatility of the P&L path decreases since less bets are made. Clearly even this
 basic model vastly outperforms the market, albeit on the limited amount of ODI matches for which pricing is available.
 
+
+
+**UPDATE 2019-11-09: Strategy 2:**
+
+The above strategy is biased toward betting on low probability tail events and uses a flawed criteria. As an improved version, let $p1$ and $p2$ represent the market's pricing for Team 1 and Team 2 respecitvely and let $m1$ and $m2$ be the model's implied pricing for Team 1 and 2 (implied by the reciprocal of the class probabilities).
+
+If:
+
+$log(\frac{m_1}{m_2}) > log(\frac{p_1}{p_2}) + \epsilon $
+
+Then choose Team 2
+
+Conversely, if:
+
+$log(\frac{m_1}{m_2}) < log(\frac{p_1}{p_2}) - \epsilon$
+
+Then choose Team 1, for some pre-chosen $\epsilon<<1$ In the case of neither of the above conditions being satisfied, then do not bet.
+
+Using the above definitions, if Team 1 is chosen, the optimal Kelly betsizing as a fraction of current capital is given by:
+
+$optimal\space betsize = \frac{\frac{1}{m1}{(p_1 +1)}}{p_1}$
+
+And similarly for Team 2.
+
+Below is a comparison of the P&L of Strategy 2 vs Random betting.
+
+![strat_full_backtest.png](/images/cricketstats/strat_full_backtest.png)
+
+
+
 A similar strategy can be used on other formats of cricket too, increasing the number of trading oppurtunities. This basic model does
 not perform any inplay trading, that is a topic for another day...
 
 ### Other things not mentioned in this writeup required to make this basic strategy robust.
 
-* Position sizing (Kelly)
 * Other formats of the game which add more pricing data
 * Event driven inplay trading* 
 * Handling extenuating circumstance (key player injuries etc.)
@@ -147,7 +192,7 @@ not perform any inplay trading, that is a topic for another day...
 **2:** As an example, if Team1 is priced at 1.14 and Team2 is priced at 7.8, then this gives implied probabilities of
  (0.877, 0.128) for (Team1, Team2) respectively. Using these probabilities, betting at market odds would be defined as
  a simulation which would simply bet on Team1 87.7% of the time and Team2 12.8% of the time. 
- 
+
  **3:** Admittedly, searching over k factor in this way is somewhat overfit, as hyperparameter tuning in this way is itself a form of
 overfitting -- however, when using only subsets of the data, 26 seems like a very reasonable choice to
 maximising ELO's prediction of match outcome.
