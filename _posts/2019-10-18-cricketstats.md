@@ -3,6 +3,10 @@ layout:     post
 title:      Market Making and Beating the Market in Cricket Matches using a Custom ELO model and Gradient Boosting.
 date:       2019-10-18
 ---
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 
 In this brief article, I introduce an ELO rating model and use it along with match data webscraped
 from thousands of matches, along with other predictive features to build a model using gradient boosting to predict the outcome (and implied probabilities) of historical cricket matches
@@ -146,23 +150,23 @@ basic model vastly outperforms the market, albeit on the limited amount of ODI m
 
 **UPDATE 2019-11-09: Strategy 2:**
 
-The above strategy is biased toward betting on low probability tail events and uses a flawed criteria. As an improved version, let $p1$ and $p2$ represent the market's pricing for Team 1 and Team 2 respecitvely and let $m1$ and $m2$ be the model's implied pricing for Team 1 and 2 (implied by the reciprocal of the class probabilities).
+The above strategy is biased toward betting on low probability tail events and uses a flawed criteria. As an improved version, let p1 and p2 represent the market's pricing for Team 1 and Team 2 respecitvely and let m1 and m2 be the model's implied pricing for Team 1 and 2 (implied by the reciprocal of the class probabilities).
 
 If:
 
-$log(\frac{m_1}{m_2}) > log(\frac{p_1}{p_2}) + \epsilon $
+$$ log(\frac{m_1}{m_2}) > log(\frac{p_1}{p_2}) + \epsilon $$
 
 Then choose Team 2
 
 Conversely, if:
 
-$log(\frac{m_1}{m_2}) < log(\frac{p_1}{p_2}) - \epsilon$
+$$ log(\frac{m_1}{m_2}) < log(\frac{p_1}{p_2}) - \epsilon $$
 
-Then choose Team 1, for some pre-chosen $\epsilon<<1$ In the case of neither of the above conditions being satisfied, then do not bet.
+Then choose Team 1, for some pre-chosen epsilon In the case of neither of the above conditions being satisfied, then do not bet.
 
 Using the above definitions, if Team 1 is chosen, the optimal Kelly betsizing as a fraction of current capital is given by:
 
-$optimal\space betsize = \frac{\frac{1}{m1}{(p_1 +1)}}{p_1}$
+$$ optimal\space betsize = \frac{\frac{1}{m1}{(p_1 +1)}}{p_1} $$
 
 And similarly for Team 2.
 
@@ -170,6 +174,8 @@ Below is a comparison of the P&L of Strategy 2 vs Random betting.
 
 ![strat_full_backtest.png](/images/cricketstats/strat_full_backtest.png)
 
+
+Achieving the results implied from this backtest is a 3.6 sigma event meaning that there is less than a 1% probability of achieving these results if following the baseline model (random betting).
 
 
 A similar strategy can be used on other formats of cricket too, increasing the number of trading oppurtunities. This basic model does
